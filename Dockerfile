@@ -32,7 +32,7 @@ COPY . .
 FROM base AS release
 
 ENV RAILS_ENV="production" \
-    BUNDLE_PATH="/usr/local/bundle" \
+    BUNDLE_PATH="/usr/local/bundle"
 
 COPY --from=build /usr/local/bundle /usr/local/bundle
 COPY --from=build /app /app
