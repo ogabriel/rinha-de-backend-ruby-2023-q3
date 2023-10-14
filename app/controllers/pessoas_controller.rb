@@ -1,36 +1,42 @@
-class PessoasController < ApplicationController
-  def show
-    @pessoa = Pessoa.find(params[:id])
+# frozen_string_literal: true
 
-    render json: @pessoa, except: %i[busca]
+class PessoasController < ApplicationController
+  FIELDS = %i[id apelido nome nascimento stack].freeze
+
+  def show
+    pessoa = Pessoa.select(FIELDS).find(params[:id])
+
+    if pessoa.present?
+      render json: pessoa
+    else
+      head :not_found
+    end
   end
 
   def search
     if params[:t].present?
-      pessoas = Pessoa.busca(params[:t]).select(:id, :apelido, :nome, :stack).limit(50)
+      pessoas = Pessoa.busca(params[:t]).select(FIELDS).limit(50)
 
-      render json: pessoas, except: %i[busca]
+      render json: pessoas
     else
       head :bad_request
     end
   end
 
   def create
-    if !present_params?
-      render json: '', status: 422
-    elsif !valid_params?
-      render json: '', status: 400
+    if bad_request?
+      head :bad_request
     else
-      @pessoa = Pessoa.new(pessoa_params)
+      pessoa = Pessoa.new(pessoa_params)
 
-      if @pessoa.save
-        render json: '', status: :created, location: @pessoa
+      if pessoa.save
+        head :created, location: pessoa
       else
-        render json: '', status: :unprocessable_entity
+        head :unprocessable_entity
       end
     end
   rescue ActiveRecord::RecordNotUnique
-    render json: '', status: 422
+    head :unprocessable_entity
   end
 
   def count
@@ -43,26 +49,14 @@ class PessoasController < ApplicationController
     @pessoa_params ||= params.require(:pessoa).permit(:apelido, :nome, :nascimento, stack: [])
   end
 
-  def present_params?
-    pessoa_params[:apelido].present? &&
-      pessoa_params[:nome].present? &&
-      pessoa_params[:nascimento].present?
-  end
-
-  def valid_params?
-    pessoa_params[:apelido].is_a?(String) &&
-      (pessoa_params[:apelido].length in 1..32) &&
-      pessoa_params[:nome].is_a?(String) &&
-      (pessoa_params[:nome].length in 1..100) &&
-      pessoa_params[:nascimento].is_a?(String) &&
-      (pessoa_params[:nascimento].length == 10) &&
-      valid_stack_types?
-  end
-
-  def valid_stack_types?
-    return true if pessoa_params[:stack].nil?
-
-    pessoa_params[:stack].is_a?(Array) &&
-      pessoa_params[:stack].all? { |s| s.is_a?(String) && s.length in 1..32 }
+  # necessário porque o cast do rais é muito agressivo e permite coisas q a rinha não permite
+  def bad_request?
+    !pessoa_params[:apelido].is_a?(String) ||
+      !pessoa_params[:nome].is_a?(String) ||
+      !pessoa_params[:nascimento].is_a?(String) ||
+      !(pessoa_params[:stack].nil? ||
+      (pessoa_params[:stack].is_a?(Array) &&
+        pessoa_params[:stack].any? &&
+        pessoa_params[:stack].all? { |s| s.is_a?(String) }))
   end
 end
