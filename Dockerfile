@@ -1,4 +1,4 @@
-FROM registry.docker.com/library/ruby:3.2.2-alpine AS base
+FROM ruby:3.3.0-preview2-alpine3.17 AS base
 
 RUN apk add --no-cache \
     build-base \
