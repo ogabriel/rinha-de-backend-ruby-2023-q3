@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :pessoas, only: %i[show create]
-  get "pessoas" => "pessoas#search"
-  get "contagem-pessoas" => "pessoas#count"
+  get 'pessoas' => 'pessoas#search'
+  get 'contagem-pessoas' => 'pessoas#count'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
