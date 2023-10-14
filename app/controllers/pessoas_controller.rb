@@ -34,7 +34,7 @@ class PessoasController < ApplicationController
   end
 
   def count
-    render json: Pessoa.count
+    render plain: Pessoa.count.to_s
   end
 
   private
