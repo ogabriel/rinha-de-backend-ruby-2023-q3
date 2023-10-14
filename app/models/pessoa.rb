@@ -8,7 +8,15 @@ class Pessoa < ApplicationRecord
   private
 
   def valid_nascimento?
-    Date.parse(nascimento)
+    year, month, day = nascimento.split('-')
+
+    if year.to_s.length != 4 ||
+       month.to_s.length != 2 ||
+       day.to_s.length != 2
+      errors.add(:nascimento, 'invalid')
+    else
+      Date.parse(nascimento)
+    end
   rescue Date::Error
     errors.add(:nascimento, 'invalid')
   end
