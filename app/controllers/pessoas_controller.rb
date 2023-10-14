@@ -7,11 +7,11 @@ class PessoasController < ApplicationController
 
   def search
     if params[:t].present?
-      @pessoas = Pessoa.where('busca LIKE ?', "%#{params[:t]}%").limit(50)
+      pessoas = Pessoa.busca(params[:t]).select(:id, :apelido, :nome, :stack).limit(50)
 
-      render json: @pessoas, except: %i[busca]
+      render json: pessoas, except: %i[busca]
     else
-      render json: '', status: 400
+      head :bad_request
     end
   end
 

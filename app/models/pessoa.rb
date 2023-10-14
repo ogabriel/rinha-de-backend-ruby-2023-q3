@@ -5,6 +5,8 @@ class Pessoa < ApplicationRecord
 
   validate :valid_nascimento?
 
+  scope :busca, ->(term) { where('busca LIKE ?', "%#{term}%") }
+
   private
 
   def valid_nascimento?
