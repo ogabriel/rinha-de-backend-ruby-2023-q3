@@ -10,6 +10,6 @@ class CreatePessoas < ActiveRecord::Migration[7.1]
 
     add_index :pessoas, :apelido, unique: true
     enable_extension :pg_trgm
-    execute('CREATE INDEX ON pessoas USING GIST (busca gist_trgm_ops(siglen=256))')
+    execute('CREATE INDEX ON pessoas USING GIST (busca gist_trgm_ops(siglen=1024))')
   end
 end
