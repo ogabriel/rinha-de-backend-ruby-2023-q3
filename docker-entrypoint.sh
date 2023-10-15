@@ -9,6 +9,6 @@ elif [ "$1" = 'server' ]; then
     exec /app/bin/rails server
 elif [ "$1" = 'migrate_and_server' ]; then
     cd app
-    /app/bin/rails db:create db:migrate
+    /app/bin/rails db:drop db:create db:migrate
     exec /app/bin/rails server
 fi

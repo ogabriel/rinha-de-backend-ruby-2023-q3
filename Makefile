@@ -14,24 +14,21 @@ dev-exec:
 dev-local:
 	build_postgres-15 || exit 0
 	./bin/rails server
+
 one:
 	make down
-	docker volume rm $(PROJECT)-one_postgres-data || exit 0
 	docker compose -f docker-compose.one.yml -p $(PROJECT)-one up
 
 one-build:
 	make down
-	docker volume rm $(PROJECT)-one_postgres-data || exit 0
 	docker compose -f docker-compose.one.yml -p $(PROJECT)-one up --build
 
 two:
 	make down
-	docker volume rm $(PROJECT)-two_postgres-data || exit 0
 	docker compose -f docker-compose.two.yml -p $(PROJECT)-two up
 
 two-build:
 	make down
-	docker volume rm $(PROJECT)-two_postgres-data || exit 0
 	docker compose -f docker-compose.two.yml -p $(PROJECT)-two up --build
 
 down:
