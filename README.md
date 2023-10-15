@@ -71,6 +71,8 @@ A contagem de pessoas é: 41257
 
 #### Resultado do gatling navegador
 
+Com o nginx bem tunado, o tempo de resposta é até melhor do que sem ele.
+
 ![resultado gatling navegador part 1](./images/gatling-browser-two-1.png)
 ![resultado gatling navegador part 2](./images/gatling-browser-two-2.png)
 
@@ -79,29 +81,25 @@ A contagem de pessoas é: 41257
 ```
 ================================================================================
 ---- Global Information --------------------------------------------------------
-> request count                                     108606 (OK=97082  KO=11524 )
+> request count                                     109530 (OK=98183  KO=11347 )
 > min response time                                      0 (OK=0      KO=0     )
-> max response time                                  60094 (OK=59740  KO=60094 )
-> mean response time                                  2108 (OK=2135   KO=1880  )
-> std deviation                                       5125 (OK=4057   KO=10433 )
-> response time 50th percentile                        519 (OK=694    KO=0     )
-> response time 75th percentile                       2931 (OK=2980   KO=1     )
-> response time 95th percentile                       6491 (OK=6686   KO=48    )
-> response time 99th percentile                      23154 (OK=18603  KO=60001 )
-> mean requests/sec                                448.785 (OK=401.165 KO=47.62 )
+> max response time                                  13890 (OK=13890  KO=8     )
+> mean response time                                  1053 (OK=1175   KO=0     )
+> std deviation                                       1286 (OK=1304   KO=0     )
+> response time 50th percentile                         86 (OK=412    KO=0     )
+> response time 75th percentile                       2645 (OK=2693   KO=1     )
+> response time 95th percentile                       2954 (OK=2988   KO=1     )
+> response time 99th percentile                       3781 (OK=3793   KO=1     )
+> mean requests/sec                                524.067 (OK=469.775 KO=54.292)
 ---- Response Time Distribution ------------------------------------------------
-> t < 800 ms                                         50006 ( 46%)
-> 800 ms <= t < 1200 ms                               4455 (  4%)
-> t >= 1200 ms                                       42621 ( 39%)
-> failed                                             11524 ( 11%)
+> t < 800 ms                                         54176 ( 49%)
+> 800 ms <= t < 1200 ms                               3493 (  3%)
+> t >= 1200 ms                                       40514 ( 37%)
+> failed                                             11347 ( 10%)
 ---- Errors --------------------------------------------------------------------
-> j.i.IOException: Premature close                                11139 (96.66%)
-> Request timeout to localhost/127.0.0.1:9999 after 60000 ms        338 ( 2.93%)
-> status.find.in([200, 209], 304), found 502                         29 ( 0.25%)
-> status.find.in(201,422,400), but actually found 502                17 ( 0.15%)
-> status.find.is(400), but actually found 502                         1 ( 0.01%)
+> j.i.IOException: Premature close                                11347 (100.0%)
 ================================================================================
-A contagem de pessoas é: 40195
+A contagem de pessoas é: 41115
 ```
 
 #### Recusos do docker durante a parte mais pesada do teste
