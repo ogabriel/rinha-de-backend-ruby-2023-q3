@@ -11,9 +11,9 @@ services:
       BUNDLE_PATH: "/usr/local/bundle"
       BUNDLE_WITHOUT: "development test"
       BUNDLE_DEPLOYMENT: "1"
-      RAILS_LOG_LEVEL: warn
+      RAILS_LOG_LEVEL: error
       WEB_CONCURRENCY: 1
-      RAILS_MAX_THREADS: 50
+      RAILS_MAX_THREADS: 30
       RUBY_YJIT_ENABLE: 1
       DATABASE_URL: postgres://postgres:postgres@127.0.0.1/rinha
       SECRET_KEY_BASE: xUZ2aYKI10TzUGY4juCkDIpip9LaDi8KOj0emd8HOHiFZh2zKT5sLXg+0/wzHfnw
