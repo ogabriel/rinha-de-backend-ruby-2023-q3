@@ -3,6 +3,8 @@
 class PessoasController < ApplicationController
   FIELDS = %i[id apelido nome nascimento stack].freeze
 
+  before_action :validate_pessoas_params, only: :create
+
   def show
     pessoa = Pessoa.select(FIELDS).find(params[:id])
 
@@ -24,16 +26,12 @@ class PessoasController < ApplicationController
   end
 
   def create
-    if bad_request?
-      head :bad_request
-    else
-      pessoa = Pessoa.new(pessoa_params)
+    pessoa = Pessoa.new(pessoa_params)
 
-      if pessoa.save
-        head :created, location: pessoa
-      else
-        head :unprocessable_entity
-      end
+    if pessoa.save
+      head :created, location: pessoa
+    else
+      head :unprocessable_entity
     end
   rescue ActiveRecord::RecordNotUnique
     head :unprocessable_entity
@@ -49,14 +47,47 @@ class PessoasController < ApplicationController
     @pessoa_params ||= params.require(:pessoa).permit(:apelido, :nome, :nascimento, stack: [])
   end
 
-  # necessário porque o cast do rais é muito agressivo e permite coisas q a rinha não permite
-  def bad_request?
-    !pessoa_params[:apelido].is_a?(String) ||
-      !pessoa_params[:nome].is_a?(String) ||
-      !pessoa_params[:nascimento].is_a?(String) ||
-      !(pessoa_params[:stack].nil? ||
-      (pessoa_params[:stack].is_a?(Array) &&
-        pessoa_params[:stack].any? &&
-        pessoa_params[:stack].all? { |s| s.is_a?(String) }))
+  def validate_pessoas_params
+    if pessoa_params[:apelido].nil? || pessoa_params[:nome].nil? || pessoa_params[:nascimento].nil?
+      head :unprocessable_entity
+      return
+    elsif !(valid_strings? && valid_nascimento?)
+      head :bad_request
+      return
+    elsif !valid_stack?
+      head :unprocessable_entity
+      return
+    end
+  end
+
+  def valid_strings?
+    pessoa_params[:apelido].is_a?(String) &&
+      pessoa_params[:apelido].length.in?(1..32) &&
+      pessoa_params[:nome].is_a?(String) &&
+      pessoa_params[:nome].length.in?(1..100) &&
+      pessoa_params[:nascimento].is_a?(String) &&
+      pessoa_params[:nascimento].length == 10
+  end
+
+  def valid_nascimento?
+    nascimento = pessoa_params[:nascimento]
+
+    year, month, day = nascimento.split('-')
+
+    return unless year.to_s.length == 4 && month.to_s.length == 2 && day.to_s.length == 2
+
+    Date.parse(nascimento)
+  rescue
+    false
+  end
+
+  def valid_stack?
+    stack = params[:stack]
+
+    return true if stack.nil?
+
+    stack.is_a?(Array) &&
+      stack.any? &&
+      stack.all? { |s| s.is_a?(String) && s.length.in?(1..32) }
   end
 end
