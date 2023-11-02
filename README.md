@@ -28,14 +28,137 @@ Obviamente existem formas de "bular" isso, com batch insert, mas fazer isso foge
 
 ## Resultados
 
-### Uma instância (sem nginx)
+### Desktop
 
-#### Resultado do gatling navegador
+|CPU|RAM|
+|---|---|
+|Ryzen 5900X|32GB|
 
-![resultado gatling navegador part 1](./images/gatling-browser-one-1.png)
-![resultado gatling navegador part 2](./images/gatling-browser-one-2.png)
+#### Duas instâncias (com nginx)
 
-#### Resultado do gatling console
+##### Resultado do gatling navegador
+
+![resultado gatling navegador part 1](./images/desktop/two/gatling-browser-1.png)
+![resultado gatling navegador part 2](./images/desktop/two/gatling-browser-2.png)
+
+##### Resultado do gatling console
+
+```
+Simulation RinhaBackendSimulation completed in 205 seconds
+Parsing log file(s)...
+Parsing log file(s) done
+Generating reports...
+
+================================================================================
+---- Global Information --------------------------------------------------------
+> request count                                     114991 (OK=114991 KO=0     )
+> min response time                                      0 (OK=0      KO=-     )
+> max response time                                   1730 (OK=1730   KO=-     )
+> mean response time                                    26 (OK=26     KO=-     )
+> std deviation                                         82 (OK=82     KO=-     )
+> response time 50th percentile                          3 (OK=3      KO=-     )
+> response time 75th percentile                          4 (OK=4      KO=-     )
+> response time 95th percentile                        198 (OK=198    KO=-     )
+> response time 99th percentile                        358 (OK=358    KO=-     )
+> mean requests/sec                                558.209 (OK=558.209 KO=-     )
+---- Response Time Distribution ------------------------------------------------
+> t < 800 ms                                        114780 (100%)
+> 800 ms <= t < 1200 ms                                172 (  0%)
+> t >= 1200 ms                                          39 (  0%)
+> failed                                                 0 (  0%)
+================================================================================
+A contagem de pessoas é: 46576
+```
+
+#### Uma instância (sem nginx)
+
+##### Resultado do gatling navegador
+
+![resultado gatling navegador part 1](./images/desktop/one/gatling-browser-1.png)
+![resultado gatling navegador part 2](./images/desktop/one/gatling-browser-2.png)
+
+##### Resultado do gatling console
+
+```
+Simulation RinhaBackendSimulation completed in 205 seconds
+Parsing log file(s)...
+Parsing log file(s) done
+Generating reports...
+
+================================================================================
+---- Global Information --------------------------------------------------------
+> request count                                     114991 (OK=114991 KO=0     )
+> min response time                                      0 (OK=0      KO=-     )
+> max response time                                   1475 (OK=1475   KO=-     )
+> mean response time                                    20 (OK=20     KO=-     )
+> std deviation                                        108 (OK=108    KO=-     )
+> response time 50th percentile                          3 (OK=3      KO=-     )
+> response time 75th percentile                          5 (OK=5      KO=-     )
+> response time 95th percentile                         39 (OK=39     KO=-     )
+> response time 99th percentile                        534 (OK=534    KO=-     )
+> mean requests/sec                                558.209 (OK=558.209 KO=-     )
+---- Response Time Distribution ------------------------------------------------
+> t < 800 ms                                        114110 ( 99%)
+> 800 ms <= t < 1200 ms                                654 (  1%)
+> t >= 1200 ms                                         227 (  0%)
+> failed                                                 0 (  0%)
+================================================================================
+A contagem de pessoas é: 46576
+```
+
+### Laptop
+
+|CPU|RAM|
+|---|---|
+|Ryzen 4750U|16GB|
+
+#### Duas instâncias (com nginx)
+
+##### Resultado do gatling navegador
+
+Com o nginx bem tunado, o tempo de resposta é até melhor do que sem ele.
+
+![resultado gatling navegador part 1](./images/laptop/two/gatling-browser-1.png)
+![resultado gatling navegador part 2](./images/laptop/two/gatling-browser-2.png)
+
+##### Resultado do gatling console
+
+```
+================================================================================
+---- Global Information --------------------------------------------------------
+> request count                                     109530 (OK=98183  KO=11347 )
+> min response time                                      0 (OK=0      KO=0     )
+> max response time                                  13890 (OK=13890  KO=8     )
+> mean response time                                  1053 (OK=1175   KO=0     )
+> std deviation                                       1286 (OK=1304   KO=0     )
+> response time 50th percentile                         86 (OK=412    KO=0     )
+> response time 75th percentile                       2645 (OK=2693   KO=1     )
+> response time 95th percentile                       2954 (OK=2988   KO=1     )
+> response time 99th percentile                       3781 (OK=3793   KO=1     )
+> mean requests/sec                                524.067 (OK=469.775 KO=54.292)
+---- Response Time Distribution ------------------------------------------------
+> t < 800 ms                                         54176 ( 49%)
+> 800 ms <= t < 1200 ms                               3493 (  3%)
+> t >= 1200 ms                                       40514 ( 37%)
+> failed                                             11347 ( 10%)
+---- Errors --------------------------------------------------------------------
+> j.i.IOException: Premature close                                11347 (100.0%)
+================================================================================
+A contagem de pessoas é: 41115
+```
+
+##### Recusos do docker durante a parte mais pesada do teste
+
+![Recusos do docker durante a parte mais pesada do teste](./images/two/docker-stats.png)
+
+#### Uma instância (sem nginx)
+
+##### Resultado do gatling navegador
+
+![resultado gatling navegador part 1](./images/laptop/one/gatling-browser-1.png)
+![resultado gatling navegador part 2](./images/laptop/one/gatling-browser-2.png)
+
+##### Resultado do gatling console
 
 ```
 ================================================================================
@@ -63,45 +186,6 @@ used
 A contagem de pessoas é: 41257
 ```
 
-#### Recusos do docker durante a parte mais pesada do teste
+##### Recusos do docker durante a parte mais pesada do teste
 
-![Recusos do docker durante a parte mais pesada do teste](./images/docker-stats-one.png)
-
-### Duas instâncias
-
-#### Resultado do gatling navegador
-
-Com o nginx bem tunado, o tempo de resposta é até melhor do que sem ele.
-
-![resultado gatling navegador part 1](./images/gatling-browser-two-1.png)
-![resultado gatling navegador part 2](./images/gatling-browser-two-2.png)
-
-#### Resultado do gatling console
-
-```
-================================================================================
----- Global Information --------------------------------------------------------
-> request count                                     109530 (OK=98183  KO=11347 )
-> min response time                                      0 (OK=0      KO=0     )
-> max response time                                  13890 (OK=13890  KO=8     )
-> mean response time                                  1053 (OK=1175   KO=0     )
-> std deviation                                       1286 (OK=1304   KO=0     )
-> response time 50th percentile                         86 (OK=412    KO=0     )
-> response time 75th percentile                       2645 (OK=2693   KO=1     )
-> response time 95th percentile                       2954 (OK=2988   KO=1     )
-> response time 99th percentile                       3781 (OK=3793   KO=1     )
-> mean requests/sec                                524.067 (OK=469.775 KO=54.292)
----- Response Time Distribution ------------------------------------------------
-> t < 800 ms                                         54176 ( 49%)
-> 800 ms <= t < 1200 ms                               3493 (  3%)
-> t >= 1200 ms                                       40514 ( 37%)
-> failed                                             11347 ( 10%)
----- Errors --------------------------------------------------------------------
-> j.i.IOException: Premature close                                11347 (100.0%)
-================================================================================
-A contagem de pessoas é: 41115
-```
-
-#### Recusos do docker durante a parte mais pesada do teste
-
-![Recusos do docker durante a parte mais pesada do teste](./images/docker-stats-two.png)
+![Recusos do docker durante a parte mais pesada do teste](./images/laptop/one/docker-stats.png)
