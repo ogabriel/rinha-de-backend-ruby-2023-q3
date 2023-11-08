@@ -53,21 +53,21 @@ Generating reports...
 ---- Global Information --------------------------------------------------------
 > request count                                     114991 (OK=114991 KO=0     )
 > min response time                                      0 (OK=0      KO=-     )
-> max response time                                   1730 (OK=1730   KO=-     )
-> mean response time                                    26 (OK=26     KO=-     )
-> std deviation                                         82 (OK=82     KO=-     )
-> response time 50th percentile                          3 (OK=3      KO=-     )
-> response time 75th percentile                          4 (OK=4      KO=-     )
-> response time 95th percentile                        198 (OK=198    KO=-     )
-> response time 99th percentile                        358 (OK=358    KO=-     )
+> max response time                                    151 (OK=151    KO=-     )
+> mean response time                                     1 (OK=1      KO=-     )
+> std deviation                                          4 (OK=4      KO=-     )
+> response time 50th percentile                          1 (OK=1      KO=-     )
+> response time 75th percentile                          1 (OK=1      KO=-     )
+> response time 95th percentile                          2 (OK=2      KO=-     )
+> response time 99th percentile                          7 (OK=7      KO=-     )
 > mean requests/sec                                558.209 (OK=558.209 KO=-     )
 ---- Response Time Distribution ------------------------------------------------
-> t < 800 ms                                        114780 (100%)
-> 800 ms <= t < 1200 ms                                172 (  0%)
-> t >= 1200 ms                                          39 (  0%)
+> t < 800 ms                                        114991 (100%)
+> 800 ms <= t < 1200 ms                                  0 (  0%)
+> t >= 1200 ms                                           0 (  0%)
 > failed                                                 0 (  0%)
 ================================================================================
-A contagem de pessoas é: 46576
+A contagem de pessoas é: 46576                                                                                                       /
 ```
 
 #### Uma instância (sem nginx)
