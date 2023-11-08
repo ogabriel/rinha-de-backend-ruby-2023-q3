@@ -53,9 +53,9 @@ Generating reports...
 ---- Global Information --------------------------------------------------------
 > request count                                     114991 (OK=114991 KO=0     )
 > min response time                                      0 (OK=0      KO=-     )
-> max response time                                    151 (OK=151    KO=-     )
+> max response time                                    114 (OK=114    KO=-     )
 > mean response time                                     1 (OK=1      KO=-     )
-> std deviation                                          4 (OK=4      KO=-     )
+> std deviation                                          2 (OK=2      KO=-     )
 > response time 50th percentile                          1 (OK=1      KO=-     )
 > response time 75th percentile                          1 (OK=1      KO=-     )
 > response time 95th percentile                          2 (OK=2      KO=-     )
@@ -67,7 +67,7 @@ Generating reports...
 > t >= 1200 ms                                           0 (  0%)
 > failed                                                 0 (  0%)
 ================================================================================
-A contagem de pessoas é: 46576                                                                                                       /
+A contagem de pessoas é: 46576
 ```
 
 #### Uma instância (sem nginx)
