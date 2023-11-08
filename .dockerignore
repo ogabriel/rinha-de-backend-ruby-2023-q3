@@ -29,3 +29,11 @@
 !/storage/.keep
 /tmp/storage/*
 !/tmp/storage/.keep
+
+*.md
+images/
+docker-compose*
+Dockerfile
+.dockerignore
+postgresql.conf
+nginx.conf
