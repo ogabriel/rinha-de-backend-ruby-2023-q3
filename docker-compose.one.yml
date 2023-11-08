@@ -20,8 +20,7 @@ services:
       SECRET_KEY_BASE: xUZ2aYKI10TzUGY4juCkDIpip9LaDi8KOj0emd8HOHiFZh2zKT5sLXg+0/wzHfnw
       PORT: 9999
     depends_on:
-      postgres:
-        condition: service_healthy
+    - postgres
     network_mode: host
     command: ["migrate_and_server"]
     deploy:
@@ -40,11 +39,6 @@ services:
     volumes:
     - ./postgresql.conf:/etc/postgresql.conf
     command: ["postgres", "-c", "config_file=/etc/postgresql.conf"]
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 2s
-      timeout: 5s
-      retries: 10
     deploy:
       resources:
         limits:

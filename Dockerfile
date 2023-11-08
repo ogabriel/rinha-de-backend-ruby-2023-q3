@@ -7,7 +7,7 @@ RUN apk add --no-cache \
     libpq \
     postgresql-dev  \
     tzdata \
-    && rm -rf /var/cache/apk/*
+    make
 
 FROM base AS dev
 
@@ -31,6 +31,7 @@ COPY . .
 
 FROM base AS release
 
+COPY Makefile ./
 COPY --from=build /usr/local/bundle /usr/local/bundle
 COPY --from=build /app /app
 

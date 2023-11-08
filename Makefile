@@ -15,26 +15,31 @@ dev-local:
 	build_postgres-15 || exit 0
 	./bin/rails server
 
-one:
-	make down
+database-check:
+	until nc -z -v -w30 localhost 5432; do \
+	  sleep 1; \
+	done
+
+docker-compose-one:
+	make docker-compose-down
 	docker compose -f docker-compose.one.yml -p $(PROJECT)-one up
 
-one-build:
-	make down
+docker-compose-one-build:
+	make docker-compose-down
 	docker compose -f docker-compose.one.yml -p $(PROJECT)-one up --build
 
-two:
-	make down
+docker-compose-two:
+	make docker-compose-down
 	docker compose -f docker-compose.two.yml -p $(PROJECT)-two up
 
-two-build:
-	make down
+docker-compose-two-build:
+	make docker-compose-down
 	docker compose -f docker-compose.two.yml -p $(PROJECT)-two up --build
 
-down:
+docker-compose-down:
 	docker stop postgres-15 || exit 0
 	docker stop postgres-11 || exit 0
 	docker stop postgres || exit 0
-	docker compose -p $(PROJECT)-dev down
-	docker compose -p $(PROJECT)-one down
-	docker compose -p $(PROJECT)-two down
+	docker compose -p $(PROJECT)-dev down || exit 0
+	docker compose -p $(PROJECT)-two down || exit 0
+	docker compose -p $(PROJECT)-one down || exit 0
