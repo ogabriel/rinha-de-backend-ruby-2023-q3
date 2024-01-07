@@ -4,6 +4,12 @@ Implementação em elixir da [rinha de backend 2023 Q3](https://github.com/zanfr
 
 Comecei a trabalhar no projeto depois de sairem todos os resultados e os vídeos do Akita e MrPowerGamerBR, então a maioria dos "truques" já eram amplamente conhecidos. O que fiz foi tentar explorar novos "truques" além dos que eram conhecidos, além de usar esse projeto como um tempo de estudos e exploração de novas tecnológias.
 
+## Outras implementações
+
+- [Elixir](https://github.com/ogabriel/rinha-de-backend-elixir)
+- [Golang](https://github.com/ogabriel/rinha-de-backend-golang)
+- [PHP](https://github.com/ogabriel/rinha-de-backend-php)
+
 ## Objetivo
 
 Implementar a rinha em ruby on rails, e sem fazer nenuma adição de cache e batch insert.
