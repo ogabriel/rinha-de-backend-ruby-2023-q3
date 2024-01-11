@@ -8,6 +8,7 @@ services:
       target: release
     environment: &env_app1
       RAILS_ENV: "production"
+      RUBYOPT: --yjit --yjit-exec-mem-size=128
       BUNDLE_PATH: "/usr/local/bundle"
       BUNDLE_WITHOUT: "development test"
       BUNDLE_DEPLOYMENT: "1"
@@ -15,7 +16,6 @@ services:
       WEB_CONCURRENCY: 0
       RAILS_MAX_THREADS: 10
       DATABASE_POOL: 5
-      RUBY_YJIT_ENABLE: 1
       DATABASE_URL: postgres://postgres:postgres@127.0.0.1/rinha
       SECRET_KEY_BASE: xUZ2aYKI10TzUGY4juCkDIpip9LaDi8KOj0emd8HOHiFZh2zKT5sLXg+0/wzHfnw
       PORT: 9997
