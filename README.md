@@ -171,27 +171,28 @@ A contagem de pessoas é: 41115
 ```
 ================================================================================
 ---- Global Information --------------------------------------------------------
-> request count                                     109672 (OK=101239 KO=8433  )
-> min response time                                      0 (OK=0      KO=7135  )
-> max response time                                  48867 (OK=48867  KO=43425 )
-> mean response time                                  2087 (OK=1154   KO=13288 )
-> std deviation                                       4559 (OK=2775   KO=6475  )
-> response time 50th percentile                         10 (OK=7      KO=10001 )
-> response time 75th percentile                       2374 (OK=2098   KO=12964 )
-> response time 95th percentile                      10001 (OK=5420   KO=29727 )
-> response time 99th percentile                      24425 (OK=11839  KO=34688 )
-> mean requests/sec                                476.835 (OK=440.17 KO=36.665)
+> request count                                      97378 (OK=69952  KO=27426 )
+> min response time                                      0 (OK=1      KO=0     )
+> max response time                                  43492 (OK=42895  KO=43492 )
+> mean response time                                 10851 (OK=8240   KO=17512 )
+> std deviation                                       9834 (OK=9406   KO=7480  )
+> response time 50th percentile                      12188 (OK=3054   KO=14383 )
+> response time 75th percentile                      17393 (OK=16420  KO=21709 )
+> response time 95th percentile                      29278 (OK=26163  KO=32964 )
+> response time 99th percentile                      36293 (OK=34767  KO=37478 )
+> mean requests/sec                                417.931 (OK=300.223 KO=117.708)
 ---- Response Time Distribution ------------------------------------------------
-> t < 800 ms                                         70410 ( 64%)
-> 800 ms <= t < 1200 ms                               1897 (  2%)
-> t >= 1200 ms                                       28932 ( 26%)
-> failed                                              8433 (  8%)
+> t < 800 ms                                         28244 ( 29%)
+> 800 ms <= t < 1200 ms                               1809 (  2%)
+> t >= 1200 ms                                       39899 ( 41%)
+> failed                                             27426 ( 28%)
 ---- Errors --------------------------------------------------------------------
-> j.n.ConnectException: finishConnect(..) failed: Connection ref   5492 (65.13%)
-used
-> j.i.IOException: Premature close                                 2941 (34.87%)
+> status.find.in(201,422,400), but actually found 502             20363 (74.25%)
+> status.find.in([200, 209], 304), found 502                       5499 (20.05%)
+> status.find.is(400), but actually found 502                       830 ( 3.03%)
+> j.i.IOException: Premature close                                  734 ( 2.68%)
 ================================================================================
-A contagem de pessoas é: 41257
+A contagem de pessoas é: 34842
 ```
 
 ##### Recusos do docker durante a parte mais pesada do teste
