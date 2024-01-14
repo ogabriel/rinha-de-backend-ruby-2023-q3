@@ -74,6 +74,7 @@ GEM
       minitest (>= 5.1)
       mutex_m
       tzinfo (~> 2.0)
+    agoo (2.15.8)
     ast (2.4.2)
     base64 (0.1.1)
     bigdecimal (3.1.4)
@@ -226,6 +227,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  agoo (~> 2.15)
   debug
   dotenv-rails
   pg (~> 1.1)
