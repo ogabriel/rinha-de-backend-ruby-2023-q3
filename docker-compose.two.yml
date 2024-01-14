@@ -8,7 +8,8 @@ services:
       target: release
     environment: &env_app1
       RAILS_ENV: "production"
-      RUBYOPT: --yjit --yjit-exec-mem-size=128
+      # RUBYOPT: --yjit --yjit-exec-mem-size=128
+      RUBYOPT: --yjit-disable
       BUNDLE_PATH: "/usr/local/bundle"
       BUNDLE_WITHOUT: "development test"
       BUNDLE_DEPLOYMENT: "1"
