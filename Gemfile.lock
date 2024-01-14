@@ -211,7 +211,7 @@ GEM
     ruby2_keywords (0.0.5)
     stringio (3.0.8)
     thor (1.2.2)
-    timeout (0.4.0)
+    timeout (0.4.1)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.5.0)
