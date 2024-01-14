@@ -143,8 +143,6 @@ GEM
       pry (>= 0.10.4)
     psych (5.1.1)
       stringio
-    puma (6.4.0)
-      nio4r (~> 2.0)
     racc (1.7.1)
     rack (3.0.8)
     rack-session (2.0.0)
@@ -232,7 +230,6 @@ DEPENDENCIES
   dotenv-rails
   pg (~> 1.1)
   pry-rails
-  puma (>= 5.0)
   rails (~> 7.1.1)
   rubocop-rails
   tzinfo-data
